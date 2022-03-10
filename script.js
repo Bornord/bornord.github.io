@@ -1,4 +1,4 @@
-alert("Hello world!");
+//alert("Hello world!");
 
 function test(int){
     console.log(int);
