@@ -9,6 +9,25 @@
         <div id="app">
             <h1> Vue Mart</h1>
 
+            <h2> Catalogue </h2>
+            <input 
+            id = article
+            type = "text"
+            >
+
+            <input 
+            id = nombre
+            type = "text"
+            >
+
+            <input 
+            id = 5
+            type = "button"
+            value = "Ajouter cet article"
+            @click = "ajout()"
+            >
+
+
             <h2>État de la commande</h2>
             <p v-if = "!validation"> La commande n'est pas encore validé </p>
             <p v-else > La commande vient d'être validée </p>
@@ -27,14 +46,14 @@
                 id = 1
                 type = "button"
                 value = "Valider"
-                @click = valider()
+                @click = "valider()"
             >
 
             <input 
             id = 2
             type = "button"
             value = "Annuler"
-            @click = annuler()
+            @click = "annuler()"
         >
 
         </div>
@@ -74,6 +93,16 @@
                             this.validation = false;
                         }
                     }, 
+
+                    ajout() {
+                        const val = document.getElementById("nombre").value;
+                        const article = document.getElementById("article").value;
+                        this.panier.forEach(element => {
+                            if (element.label == article) {
+                                element.qte = val;
+                            }
+                        });
+                    },
                 }
             });
         </script>
