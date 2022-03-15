@@ -6,8 +6,76 @@
     </head>
 
     <body>
-        Politique de prix
-        <br/>
-        <br/>
+        <div id="app">
+            <h1> Vue Mart</h1>
+
+            <h2>État de la commande</h2>
+            <p v-if = "!validation"> La commande n'est pas encore validé </p>
+            <p v-else > La commande vient d'être validée </p>
+
+
+            <h2>Récapitulatif du panier d'achat</h2>
+            <ul >
+                <li v-for = "item in panier" v-if = "item.qte > 0">{{ item.qte }} {{ item.label }} de prix unitaire {{ item.cost }}€</li>
+            </ul>
+            <p>
+                Total: {{prixTotal()}} €
+            </p>
+
+            <h2>Confirmation</h2>
+            <input 
+                id = 1
+                type = "button"
+                value = "Valider"
+                @click = valider()
+            >
+
+            <input 
+            id = 2
+            type = "button"
+            value = "Annuler"
+            @click = annuler()
+        >
+
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script>
+            const app = new Vue({
+                el: "#app",
+                // champ obligatoire
+                data: {
+                    panier: [
+                    {label: "Pomme", cost: 1, qte: 3},
+                    {label: "Noix de coco", cost: 5,qte: 6},
+                    {label: "Ananas", cost: 3,qte: 1},
+                    {label: "Poire", cost: 3,qte: 1},
+                    ],
+                    validation: false,
+                },
+                methods: {
+                    prixTotal(){
+                        res = 0;
+                        this.panier.forEach(element => res += element.cost * element.qte);
+                        return res;
+                    },
+
+                    valider(){
+                        if (this.validation){
+                            alert("Votre commande a déjà été validée. ")
+                        } else {
+                            this.validation = true;
+                        }
+                    },
+
+                    annuler(){
+                        if (!this.validation) {
+                            alert("Vous n'avez aucune commande à annuler. ")
+                        } else {
+                            this.validation = false;
+                        }
+                    }, 
+                }
+            });
+        </script>
     </body>
 </html>
