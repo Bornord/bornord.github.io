@@ -1,22 +1,32 @@
 <template>
-	<div id="app">
-		<nav>
-			<NavLink url="/" text="Test"/><br/>
-			<NavLink url = "/about" text = "À propos"/><br/>
-			<NavLink url = "/contact" text = "Contact"/><br/>
-		</nav>
-		<p>Bienvenue sur notre page d'<NavLink url= "/" text = "Accueil" /></p>
-	</div>
+  <div id="app">
+    <nav>
+      <router-link to="/">Home</router-link> |
+      <router-link to="/about">About</router-link>
+    </nav>
+    <router-view/>
+  </div>
 </template>
 
-<script>
-import NavLink from './components/HomeLink.vue'
-
-export default {
-	name: 'App',
-	components: {
-		NavLink
-	}
+<style lang="scss">
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
 }
-</script>
 
+nav {
+  padding: 30px;
+
+  a {
+    font-weight: bold;
+    color: #2c3e50;
+
+    &.router-link-exact-active {
+      color: #42b983;
+    }
+  }
+}
+</style>
